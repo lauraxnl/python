@@ -99,10 +99,18 @@ class LearningSwitch (object):
     # note que tomamos el parametro "port" que nos indica el puerto de destino 
 
     packet = event.parsed
-    ip_packet = packet.payload
-    ip_origen = ip_packet.srcip
+    #ip_packet = packet.payload
+    #ip_origen = ip_packet.srcip
+    horact=datetime.now().time
+    hora1 = datetime.strptime("08:00:00", "%X").time()
+    hora2 = datetime.strptime("18:00:00", "%X").time()
 
-    id_fila = str(ip_origen).split(".")[3]
+
+    if (horact>=hora1 and horact<hora2):
+	 id_fila=1
+    else:
+	id_fila=2
+
     print "La fila seria: ", id_fila
 
     msg = of.ofp_flow_mod()
